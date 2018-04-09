@@ -32,6 +32,10 @@ public class Projeto {
 			throw new Exception("O aluno deve ser do quarto período.");
 		}
 	}
+	
+	public void addTecnologia(Tecnologia tecnologia) {
+		this.tecnologias.add(tecnologia);
+	}
 
 	public Professor getProfessorResponsavel() {
 		return professorResponsavel;
@@ -99,10 +103,6 @@ public class Projeto {
 
 	public ArrayList<Tecnologia> getTecnologias() {
 		return tecnologias;
-	}
-
-	public void setTecnologias(ArrayList<Tecnologia> tecnologias) {
-		this.tecnologias = tecnologias;
 	}
 
 	@Override

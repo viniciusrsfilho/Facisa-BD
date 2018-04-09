@@ -5,9 +5,11 @@ import javax.swing.JOptionPane;
 import br.cesed.si.bd.atividade.dao.AlunoDAO;
 import br.cesed.si.bd.atividade.dao.ProfessorDAO;
 import br.cesed.si.bd.atividade.dao.ProjetoDAO;
+import br.cesed.si.bd.atividade.dao.TecnologiaDAO;
 import br.cesed.si.bd.atividade.domain.Aluno;
 import br.cesed.si.bd.atividade.domain.Professor;
 import br.cesed.si.bd.atividade.domain.Projeto;
+import br.cesed.si.bd.atividade.domain.Tecnologia;
 import br.cesed.si.bd.atividade.factories.AlunoFactory;
 import br.cesed.si.bd.atividade.factories.ProfessorFactory;
 import br.cesed.si.bd.atividade.factories.ProjetoFactory;
@@ -19,14 +21,16 @@ public class App {
 		ProjetoDAO projetodao = new ProjetoDAO();
 		ProfessorDAO professordao = new ProfessorDAO();
 		AlunoDAO alunodao = new AlunoDAO();
+		TecnologiaDAO tecnologiadao = new TecnologiaDAO();
 		int resposta;
 		
 		do {
-			String respostaStr = JOptionPane.showInputDialog("Bem-vindo, O que você deseja?"
+			String respostaStr = JOptionPane.showInputDialog("Bem-vindo, o que você deseja?"
 		
 				+ "\n 1) Criar projeto \n 2) Adicionar aluno no projeto \n 3) Listar projetos "
 				+ "\n 4) Buscar projeto por titulo \n 5) Buscar projeto de um professor \n 6) Buscar projeto de um aluno"
-				+ "\n 7) Buscar participantes de um projeto \n 8) Sair");
+				+ "\n 7) Buscar participantes de um projeto \n 8) Adicionar tecnologia em um projeto \n 9) Buscar tecnologias de um projeto"
+				+ "\n 10) Sair");
 			resposta = Integer.parseInt(respostaStr);
 		
 		if(resposta == 1) {
@@ -73,9 +77,26 @@ public class App {
 		} if(resposta == 7) {
 			String titulo = JOptionPane.showInputDialog("Digite o titulo do projeto:");
 			JOptionPane.showMessageDialog(null, projetodao.getParticipantes(titulo));
+			
+		} if(resposta == 8) {
+			String titulo = JOptionPane.showInputDialog("Digite o titulo do projeto: ");
+			Projeto p1 = projetodao.getByTitle(titulo);
+			String nome = JOptionPane.showInputDialog("Digite o nome da tecnologia: ");
+			String tipo = JOptionPane.showInputDialog("Digite o tipo da tecnologia: ");
+			String link = JOptionPane.showInputDialog("Digite o link da tecnologia: ");
+			String descricao = JOptionPane.showInputDialog("Digite a descrição da tecnologia: ");
+			Tecnologia t = new Tecnologia(nome, tipo, link, descricao);
+			tecnologiadao.create(t);
+			p1.addTecnologia(t);
+			JOptionPane.showMessageDialog(null, t + " adicionada com sucesso");
+			
+		} if(resposta == 9) {
+			String titulo = JOptionPane.showInputDialog("Digite o titulo do projeto: ");
+			Projeto p1 = projetodao.getByTitle(titulo);
+			JOptionPane.showMessageDialog(null, p1.getTecnologias());
 		}
 		
-		} while(resposta != 8);
+		} while(resposta != 10);
 	   
 	}
 }
