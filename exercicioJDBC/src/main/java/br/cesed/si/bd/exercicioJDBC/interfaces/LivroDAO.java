@@ -14,5 +14,7 @@ public interface LivroDAO {
 	void atualizar(Livro livro) throws ClassNotFoundException, SQLException;
 	
 	List<Livro> listarTodos() throws ClassNotFoundException, SQLException;
+	
+	List<Livro> listarPorTitulo(String titulo) throws ClassNotFoundException, SQLException;
 
 }

@@ -2,48 +2,49 @@ package br.cesed.si.bd.exercicioJDBC.domain;
 
 public class Livro {
 	
-	private int id;
+	private int idLivro;
 	private String titulo;
-	private String autor;
 	private String descricao;
+	private Editora editora;
 	
-	public Livro(int id, String titulo, String autor, String descricao) {
-		this.id = id;
+	public Livro(int id, String titulo, String descricao, Editora editora) {
+		this.idLivro = id;
 		this.titulo = titulo;
-		this.autor = autor;
 		this.descricao = descricao;
+		this.editora = editora;
 	}
-	
-	public int getId() {
-		return id;
+
+	public int getIdLivro() {
+		return idLivro;
 	}
-	public void setId(int id) {
-		this.id = id;
+
+	public void setIdLivro(int id) {
+		this.idLivro = id;
 	}
+
 	public String getTitulo() {
 		return titulo;
 	}
+
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
-	public String getAutor() {
-		return autor;
-	}
-	public void setAutor(String autor) {
-		this.autor = autor;
-	}
+
 	public String getDescricao() {
 		return descricao;
 	}
+
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
 
-	@Override
-	public String toString() {
-		return "Livro [id=" + id + ", titulo=" + titulo + ", autor=" + autor + ", descricao=" + descricao + "]";
+	public Editora getEditora() {
+		return editora;
+	}
+
+	public void setEditora(Editora editora) {
+		this.editora = editora;
 	}
 	
 	
-
 }

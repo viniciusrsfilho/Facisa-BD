@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import br.cesed.si.bd.exercicioJDBC.interfaces.LivroDAO;
+import br.cesed.si.bd.exercicioJDBC.jdbc.LivroJDBC;
 
 public class GerenteDeBiblioteca {
 	

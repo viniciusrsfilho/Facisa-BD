@@ -1,34 +1,25 @@
 package br.cesed.si.bd.exercicioJDBC;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 
-import br.cesed.si.bd.exercicioJDBC.domain.GerenteDeBiblioteca;
-import br.cesed.si.bd.exercicioJDBC.domain.Livro;
+import br.cesed.si.bd.exercicioJDBC.factories.ConexaoFactory;
 
 /**
  * Hello world!
  *
  */
 public class App {
-	public static void main(String[] args) {
-
-		try {
-			
-			Livro l1 = new Livro(1, "Banco de dados", "Vinicius Ramos", "Livro de banco de dados");
-			Livro l2 = new Livro(2, "Programação", "Vinicius", "Livro de programação");
-			GerenteDeBiblioteca gerente = new GerenteDeBiblioteca();
-			gerente.cadastrar(l1);
-			gerente.cadastrar(l2);
-			
-			l2.setAutor("Vinicius Ramos");
-			gerente.atualizar(l2);
-			gerente.deletar(l2);
-			System.out.println(gerente.listarTodos());
-			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+		Connection con = ConexaoFactory.getConexao();
+		
+		
+		PreparedStatement stm = con.prepareStatement("insert into enderecos (id_endereco, cep) values (?, ?)");
+		stm.setInt(1, 3);
+		stm.setString(2, "12345");
+		
+		stm.executeUpdate();
 	}
 }
