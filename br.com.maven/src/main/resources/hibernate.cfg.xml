@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<hibernate-configuration> 
+<session-factory> 
+			<!--  Driver do BD -->
+			<property name="hibernate.connection.driver_class">org.postgresql.Driver</property> 
+			<!--  String de Conexão do BD -->
+			<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/cadastrodepessoas</property> 
+			<!--  Usuário do BD -->
+			<property name="hibernate.connection.username">postgres</property> 
+			<!--  Senha do BD -->
+			<property name="hibernate.connection.password">091198</property> 
+			<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property> 
+			<!--  atualiza o banco, gera as tabelas se for preciso -->
+			<property name="hibernate.hbm2ddl.auto">update</property>
+			<property name="hibernate.connection.shutdown">true</property>
+		
+			<mapping class="br.com.maven.entities.Pessoa"/>
+			
+		
+			<!--  
+			Mapea as classes que serão utilizadas como tabela
+			Ex:
+			<mapping class="Endereco"/>	
+			<mapping class="Telefone"/>			
+			 -->
+</session-factory> 
+</hibernate-configuration>
