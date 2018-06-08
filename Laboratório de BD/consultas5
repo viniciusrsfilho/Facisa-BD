@@ -1,0 +1,68 @@
+alter table clientes add cpf varchar(15);
+
+update clientes set cpf = '10101010' where id_cliente = 10;
+
+select nome from clientes where cpf in ('11111111', '77777777', '99999999','88888888', '10101010');
+
+select nome, cpf from clientes group by cpf, nome;
+
+create database mundo;
+
+create table continentes (
+	id_continente serial,
+    nome varchar(20),
+    constraint pk_id_continente primary key (id_continente)
+);
+
+insert into continentes (nome) values ('America');
+insert into continentes (nome) values ('Europa');
+
+create table paises (
+	id_pais serial,
+    id_continente int,
+    nome varchar(50),
+    constraint pk_id_pais primary key (id_pais),
+    constraint fk_id_continente foreign key (id_continente) references continentes (id_continente)
+);
+
+insert into paises (id_continente, nome) values (1, 'Brasil');
+insert into paises (id_continente, nome) values (1, 'Argentina');
+insert into paises (id_continente, nome) values (1, 'Uruguai');
+insert into paises (id_continente, nome) values (2, 'Inglaterra');
+insert into paises (id_continente, nome) values (2, 'França');
+insert into paises (id_continente, nome) values (2, 'Espanha');
+
+create table estados (
+	id_estado serial,
+    id_pais int,
+    nome varchar(50),
+    constraint pk_id_estado primary key (id_estado),
+    constraint fk_id_pais foreign key (id_pais) references paises (id_pais)
+);
+
+alter table estados add column populacao int;
+
+insert into estados (id_pais, nome, populacao) values (1, 'Paraiba', 1000000);
+insert into estados (id_pais, nome, populacao) values (1, 'Pernambuco', 1000000);
+insert into estados (id_pais, nome, populacao) values (1, 'Rio Grande do Norte', 1000000);
+insert into estados (id_pais, nome, populacao) values (1, 'Ceara', 1000000);
+
+insert into estados (id_pais, nome, populacao) values (5, 'Paris', 2000000);
+
+select p.nome, sum(e.populacao) from estados as e inner join paises as p on (e.id_pais = p.id_pais)
+group by p.nome;
+
+select c.nome, sum(e.populacao) from estados as e inner join paises as p on (e.id_pais = p.id_pais)
+inner join continentes as c on (c.id_continente = p.id_continente) group by c.nome;
+
+select p.nome, sum(e.populacao) from paises as p inner join estados as e on (e.id_pais = p.id_pais) group by p.nome having sum(e.populacao) <= 2000000;
+
+select * from pratos
+
+update pratos set quantidade = 0.5 where id_prato <= 9
+
+select i.nome, avg(pi.quantidade) from ingredientes as i inner join pratos_ingredientes as pi on 
+(pi.id_ingrediente = i.id_ingrediente) inner join pratos as p on (pi.id_prato = p.id_prato) group by i.nome order by i.nome;
+
+select i.nome from ingredientes as i inner join pratos_ingredientes as pi on (i.id_ingrediente = pi.id_ingrediente)
+group by i.nome, pi.quantidade having avg(pi.quantidade) > 0.5;

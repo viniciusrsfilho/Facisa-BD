@@ -1,0 +1,7 @@
+select vendedores.nome, count(vendas.id_vendedor) from vendedores left join vendas on (vendas.id_vendedor = vendedores.id_vendedor) group by vendedores.nome;
+
+select vendedores.nome, count(vendas.id_vendedor) from vendas right join vendedores on (vendas.id_vendedor = vendedores.id_vendedor) group by vendedores.nome;
+
+select vendedores.nome, count(vendas.id_vendedor) from vendas right join vendedores on (vendas.id_vendedor = vendedores.id_vendedor) where vendas.id_vendedor is null group by vendedores.nome
+
+select vendedores.nome, count(vendas.id_vendedor) from vendedores left join vendas on (vendas.id_vendedor = vendedores.id_vendedor) group by vendedores.nome

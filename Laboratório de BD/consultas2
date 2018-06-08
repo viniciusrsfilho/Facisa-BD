@@ -1,0 +1,13 @@
+select clientes.nome, vendedores.nome from vendas inner join clientes on (vendas.id_cliente = clientes.id_cliente) inner join vendedores on (vendas.id_vendedor = vendedores.id_vendedor)
+
+select distinct clientes.nome, vendedores.nome from vendas inner join clientes on (vendas.id_cliente = clientes.id_cliente) inner join vendedores on (vendas.id_vendedor = vendedores.id_vendedor)
+
+select pratos.nome, pratos.preco as preçoatual, pratos.preco * 1.1 as preçoproposto from pratos;
+
+select sum(pratos.preco * 1.1) from pratos;
+
+select pratos.nome, vendas.preco, vendas.preco * 1.1 from vendas inner join pratos on (vendas.id_prato = pratos.id_prato);
+
+select sum(vendas.preco * 1.1) from vendas inner join pratos on (vendas.id_prato = pratos.id_prato);
+
+select pratos.nome, count(vendas.quantidade) from pratos left join vendas on (vendas.id_prato = pratos.id_prato) group by pratos.nome;

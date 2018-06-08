@@ -1,0 +1,13 @@
+select i.nome as ingrediente, v.nome as vendedor, pr.nome as prato from ingredientes as i inner join pratos_ingredientes as pi on (i.id_ingrediente = pi.id_ingrediente) inner join
+pratos as pr on (pr.id_prato = pi.id_prato) inner join vendas as vs on (vs.id_prato = pr.id_prato) inner join clientes as cl on (
+vs.id_cliente = cl.id_cliente) inner join vendedores as v on (vs.id_vendedor = v.id_vendedor and vs.id_cliente = 3)
+
+alter table vendas add column data date
+
+update vendas set data = '2018-06-16' where id_vendedor = 5;
+
+select i.nome, vs.quantidade from ingredientes as i inner join pratos_ingredientes as pi on (i.id_ingrediente = pi.id_ingrediente)
+inner join pratos as pr on (pr.id_prato = pi.id_prato) inner join vendas as vs on (vs.id_prato = pr.id_prato and vs.data between '2018-06-01' and '2018-06-30')
+
+select i.nome as ingredientes, i.quantidade_estoque from ingredientes as i inner join pratos_ingredientes as pi on (i.id_ingrediente = pi.id_ingrediente)
+inner join pratos as pr on (pr.id_prato = pi.id_prato) inner join vendas as vs on (vs.id_prato = pr.id_prato and vs.data not between '2018-06-01' and '2018-06-30')
